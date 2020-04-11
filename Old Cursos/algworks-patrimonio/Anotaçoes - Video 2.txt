@@ -1,0 +1,41 @@
+	(13.10.2017)
+
+# O que eh e não eh REST
+
+	+ a URI ('u erri i') (URL da nossa APP) deve ser sempre a mesma, a
+		unica coisa que deve mudar eh QUAL O METODO HTTP usar
+		(POST,DELETE,GET).
+		Ex:
+			Posso fazer POST -> /SalvarProduto
+			Isso eh ruim
+			Eh melhor fazer POST -> /produto
+			Ou seja, nao criar URI so pra fazer uma coisa
+			tetntar reaproveitar
+
+	+ O ideal para os erros eh voltar o tipo de erro HTTP SEMPRE		
+
+# PASSOS DO VIDEO A PARTIDE DE 16 MIN
+	
+	+ em application.propeties, coloca pra formatar as datas
+		spring.mvc.date-format=yyyy-MM-dd
+
+	+ apaga pastas static e template
+
+	+ crio a interface ItemReposity, ela ira extender JPA repository	
+	  Por conta disso, ela sera cirada em tempo de exe pelo Spring DATA
+	  entao eh algo bem simples
+
+	+ Vamos criaar a classe que vai mapear as requisiçoes
+		+ cria o pacote patrimonio/resource
+		+ cria a classe Item Resource
+	+ colocamos o marcados @RestController pra pegar requisiçoes http
+	+ ciramos itemRepository como @Autowiered, pra ja ter injetado uma 		instancia pras nossa cconsultas
+	+ criamos o metodo lista e mapeamos como sendo um metodo GET
+		por isso eh  @GetMapping("/iten")
+
+	+ em application.propertie, vamos criar um arq. sql pra fzr uns inserts
+		mais simples para podermos testar
+
+	... 
+	falta o rrestant
+	

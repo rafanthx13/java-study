@@ -1,0 +1,7 @@
+# InteliJ
+.idea
+# files .iml
+*.iml
+# folders
+/target
+/lib_buildmaster

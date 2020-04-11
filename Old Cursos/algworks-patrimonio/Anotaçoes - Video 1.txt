@@ -1,0 +1,75 @@
+	(12.10.2017)
+
+# SOFEA(Service-Oriented Fornt-END Architecture)
+	+ Arquitetura como todo front/end
+	+ tem a vantagem de, separar o back do front, o front sera baixado
+		somente uma vez, depois disso, o uso da rede fica
+		somente para trafego de JSON do back
+
+# SPA(Single Page Aplication)
+	mais em front end, pra q tudo funione em uma única pagian so
+
+#Projeto
+	+ Angular para FrontEND
+	+ SpringBoot para BackEND
+ Vamos Gerar BUILD
+	+ Front ==> Recurso Estaticos HTML e CSS
+	+ Back  ==> arquivo jar.
+ DEPLOY
+	+ Front ==> Servidor de Downloads (HTTP) Simples - como amazon
+	+ Back  ==> executar a appp e levantar o tomcat
+ Beneficios
+ 	+ Escalabilidade pois front/end vao ficar bem sepados
+	+ Da pra ter times especialistas, eh bem separado o front/back
+	+ Interoperabilidade: O front pode ser lido por desktop/celular enquanto
+		que o back pode ser em qualquer lignguagem, nao ha dependencais 		tecnicas entre eles
+	
+#FRONT.END-ANGULAR
+	ANGULAR: framework JS pra fazer forntend web, sao varias bibliotecas, vc desenvolve fazendo html orientado a template. Ela eh bem produtiva. O primeiro eh ANGULAR2 depois foi pra ANGULAR4, mas nao existe o Angular3.
+	O angular separa em componentes, onde cada um tem seu proprio html e css, isso da a vantagem de poder reaproveitar esses componentes.
+	// Lembre-se: Nao tente reinventar a roda
+	Esses componentes podem ser encontrados na net:
+		ng-bootstrap: https://ng-bootstrap.github.io/#/home
+		prime-ng: https://www.primefaces.org/primeng/
+	A primeng eh a mais completa
+	
+	TYPESCRIPT: Programaça que compila e vira javascripr, ele nao roda em navegadores. Eh uma linguagem baseada em javaScript. Familiar a JAVA.
+	ANGULAR x ANGULARJS: apesar dos nomes serem parecidos, sao bem diferetnes e nao sao compativeis, o ANGULARJS eh mais antigo que o ANGULAR
+
+#BACK.END-SRPING
+	+ REST: Pepresentational State Transfer: EH um modelo Arquitetural
+	+ Beneficios:
+		+ organizaçao
+		+ consiguimos evoluir de forma incremental
+		+ o SW fica altamente escalável
+		+ Independe de Tecnologia ja que eh algo arquitetural
+
+	+ Orientaçoes pra esse modelo pelo criadors, pra dizer que a app eh REST
+		+ Deve ser no modelo: cliente/servidor
+		+ nao deve manter um estado
+		+ Deve ter cache, mas nao em todos os pontos
+		+ em camadas (Elemento intermediarios de forma transperente
+		+ Codigo sob demanda: um codigo eh buscado na app e executado no 			cliente
+
+	+ REST vc RESTFUL:
+		+ REST eh um modelo arquiteturla
+		+ RESTFUL eh a aplicaçao desse modelo
+
+	+ PROTOCOLO HTTP:
+		+ orientado a CIENTE que faz REQUEST HTTP e SERVIDOR que retorna
+			RESPONSE, ou seja CLIENTE/SERVIDOR
+	
+	+ POSTMAN
+		+ Nos ajuda a fazer requisiçoes HTTP
+		
+	+ SPRING
+		+ Eh como uma incupadora de projetos
+		+ SPRING MVC:
+			+ nos ajuda a tratar requisiçoes e respostas
+		+ SPRING DATA JPA:
+			+ Eh como uma abstraçao acima do JPA
+			+ Nos ajuda dando algumas operaçoes pre implementadas
+		+ SPRING BOOT:
+			+ facilita muito o desenvolvimento
+			+ ajuda na configuração
+			

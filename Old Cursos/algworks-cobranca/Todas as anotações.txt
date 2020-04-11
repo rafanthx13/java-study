@@ -1,0 +1,272 @@
+	SPRING MVC - ALGAWORKS - (17.10.2017)
+
+	link:
+
+https://mega.nz/#F!Tc8kSa5J!4ckdY11iDwc0F-nbTvf6lw!6J1xwS6D
+
+# Técnologias a serem usadas	
+	+ Design Responsivo
+ 	+ liveReaload, JQuery, Maven
+	+ Spring Data JAPA/MVC/Boot
+	+ BootStrap, thymeleaf
+	+ Banco: MySQL; Servidor: Apache Tomcat
+
+# Pré-Requisitos
+	+ Java e OO
+	+ HTML
+	+ JavaScript e JQuery (Noções)
+	+ Desenvolvimento Web
+
+# O que é Spring?
+	+ Pivotal é a empresa que mais contribui pro Spring
+	+ Eh um conjunto de vários FrameWorks que ajudam, eh tão grande
+		que há frameworks que talvez nunca usemos.
+	+ Eh um template de projetos
+	+ Há projetos para todo o tipo de coisa
+
+# Framework Action Based ( Eh o caso do Spring MVC)
+	+ Há distinção de quem trata as requisições
+	+ Funcionamento: o Browser primeiro acessa a Framework SpringMVC, ele 
+		direciona  aos controllers, este, fala com o model (BD/SQL)
+	+ Vantagem: Fica Browser -> View -> Framework -> Controller -> Model
+		Dessa forma View fica bem longe de Controller/Model, ou seja
+		Fica independente, assim pode-se ter times especializados: um
+		em front, outro em end.
+
+# Ambiente de Desenvolvimento
+	+ Java(Ling.BACK), Thymeleaf(Ling.Front -- Substitui JSP)
+	+ Maven(Projeto), eclipse(IDE-STS), , MySQL(BD), TomCat(Servidor)
+	+ Desvantagem: Eh necessário conhecer a parte do FRONT, pra fazer todo o 			projeto, ou seja, HTML/CSS/JS
+	+ Tem tudo bem documentado quanto ao spring
+
+# Indrodução ao Maven
+	+ Gerenciador de dependências
+
+# Spring Boot
+	+ Sacada de Mestre
+	+ Torna mais fácil programar no stilo Spring
+	+ Feito pra solucionar os problemas de programadores da comunidade
+	+ Com ele, vamos presissar fazer menos configurações
+	+ Facilita a configuração do pom.xml do maven
+	+ ja traz todas as dependicas para trabalhar com uma determinada framewok
+	+ Sem usar o Spring Boot, vc tem que configurar muita coisa
+
+==================================================================================
+==================================================================================
+==================================================================================
+	2 Parte - Mão na Massa
+
+# Comentarios sobre fazer esse projeto
+	+ Realmente, vc pode errar muito por erro de sintaxe, de copiar dele
+		principlamente na parte do front, no html
+	+ Para rodar em modo DEBUG, vai no appplication.propreities e coloca
+		logging.level.root=DEBUG
+	+ Toda vez que ele fizer um teste, teste tambe, pq, se tiver algum problema 		e vc nao testr, vc vai achar que eh problema de agora
+		sendo que na verdade é um prblema de uma aula passada
+#Link do git
+	https://github.com/algaworks/workshop-comecando-com-spring-mvc/blob/master/montando-combo-dinamicamente/cobranca/src/main/resources/templates/CadastroTitulo.html
+	--> De preferencia, pesquise o nome dos arquivo e suas extensoes no
+		google
+
+# Importando projeto maven ou cirando no STS
+	+ Spring Initializr	
+	+ SnapShot significa que nao foi liberado, esta em produçao/testes
+	+ Essa forma serve para quando vc usa IDEs que nao sao do eclipse
+		pois, no eclipse, ja tem como gerar isso dentro de sua
+		propria IDE STS.
+
+# BootStrap
+	+ FrameWork HTML/CSS/JS que é responsivo
+	
+# BaixarBootStrap
+	+ Baixamos o rar. da pagina e colocamos susas pastas no nosso projeto
+	+ colocamos o bootstrap.mim.css na pasta static/css
+	+ levamos toda a pasta font em static e mandamos o bootstrap.min.js
+		pra pasta js nele, em static/js
+
+# Formato Framwork Action Based
+	+ Browser -> Framerok -> Control -> Model
+
+# Ter a dependência do devTools
+	+ Sem ele, temos que levantar o servidor apache toda hora pra ve 				modificações no html.
+	+ Ao colocar a dependência no pom.xml, nos podemos vê as mudanças feitas no 
+		html na tela na hora
+
+# Terceira Aula - Criando o Model 
+	+ Vamos colocar os dados do front para um banco de dados
+	+ Criamos uma classes que eh uma entidade de banco,  usamos
+		@Entity ==> Indica que eh o model de uma tabela do banco
+		@Id	==> Indica que eh o id da tabela relacional
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+			==> Indica que o banco vai gerar id
+		@Temporal(TemporalType.DATE)
+			==> Indica que so vamos passar a data (xx/yy/zzzz)
+
+# Quarta Aula - Repositorio
+	+ Criamos num pacote separado chamadado repository
+	+ Criamos a interface Titulos que extend JpaRepository e passamos
+		pra ela <Titulo, Long>. ao fazer isso, nao presisamos implementar
+		nada, nenhum INSERT OU SELECT
+	+ Colocamos uma instancia dela no controllador, que vai utilizla,
+		e chamamos ela de @Autowired pra ser gerada automaticamnete
+
+ # H2
+	+ Banco em Memoria usado pra testar coisas rapidamente
+		Ou seja, quando descer a app, vai apagar td
+	+ Estamos usando o BD H2, que eh um banco simples pra teste
+	+ Podemos ver ser as cisas foram feitas ou nao ao acessar
+		localhost8080/h2-console
+	+ Vai abrir uma pequena IDE do H2 onde pode fazer select e tal, testar 				muitas coisas durante execuçao
+	+
+		
+
+Aula 2.7 - 25.10.2017 - Quarta
+	+ O bootstrap presisa do Jquery, sem ele, informa um erro quando vc da F12 		no browser
+
+Aula 2.9 
+	+ Vamos criar um layout, ou seja, um bloco HTML quesera compartilhado
+		por varias paginas. Possui os mesmso beneficio que heranaça
+		em Java: evitar repetiçao de codigo e facilita manutenaçao
+
+Aula 2.10
+	+ Vamos listar os dados, enviar do model para a view
+
+Aula 2.11
+	+ LiveReaload: Wonderland to WebDevelopers
+	+ As modificações sao feitas em tempo real bon para HTML,CSS,JS (FRONT)
+	+ Requistios: ter DevTools nas dependencias e a extensão do LiveReload
+		no navegador, e, ativála na como plugin no browser
+	+ Ao executar o app Spring, desde que tenha o dev-tols, la no log,
+		sob um servidor do live reload. Com ele vc pode mudar as coisas
+		na IDE, depois essas modificaçoes sao SINCRONIZADAS na pagina
+		em tempo real sem presisar dar refresh.
+	+	A unica coisa que tem que fazer é dá Ctrl+S (save) na IDE
+			para poder aparecer na tela
+	+ Eh diferente do devetools comum
+
+Aula 2.12
+	+ Expressões THYMELEAF
+	+ Cuidado com as versões do Thymeleaf
+	+ ${} ==> usada para variáveis que sao mandadas pelo controller, naquela
+		parte de ModelAndView em que adicionoamos um objeto. Eh necessairo	
+		usar as tags do thymeleaf (th:) para funcionar.
+	+ http://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html
+	+ #{} ==> São os objetos úteis que são acessáveis pelo '#', a partir dele,
+		podemos usar metodos para modificalo paelo seu tipo, como por 
+		exemplo, comprara string no thymeleaf.
+	
+
+Aula 2.13
+	+ A validação é feita no servidor, isso consiste em colocar anotaçoes
+		como @NotNull com messages e moratalas na view.
+	+ Usamos tags do thymeleaf pra capturarmos o titulo gerado no formpra 
+		verificar se ele foi preenchido ou nao.
+	+ Nos campos onde nao foi preenchido, vai mostrar a mensagem do model	
+		e no th:each vai iterar todas as mensagens de erro
+	+ Passamos as mensagens nas tags juntas ao from-group pra colcoar elas 
+		em vermelho quando der algum problema
+
+Aula 2.14
+{Redirect, th:field}
+	+ Vamos manter os dados digitados
+	+ de:
+		name="descricao" para
+	+ para:
+		th:field="*{descricao}" 
+	+ com isso, os dados continuam nos campos
+	+ o asterisco eh para referenciar o objeto que estou recebendo na pagina
+	+ o thymeleaf vai transformar em name na pagina
+	+ Redirect do Spring MVC
+		+ Com isso, vai pra outro endereço e o brwoser faça uma nova 				  requisaicção, dessa forma, vai ser um REFRESH e o campo que antes 
+         	  ficava fixa sera apagado apos termos o enviado com sucesso.
+		+ infeliszmente, fzer um refresh faz com que se perca a mensagem 
+			de sucessos
+
+Aula 2.15 - Modificar/UPDATE
+{@RequestMapping("{variavel_url}"), @PathVariabel, anotaçao do @ do thymeleaf}
+{ Pude fazer um UPDATE nos meu daados usadno a mesma tela de cadatro}
+	+ adicionamos o link do lapis com o bootstrap;
+		+ usamos @ pra montar um link dinâmico usando parâmetro
+		+ no controler agente recebe o parametro de codigo
+			e o jpa ja recebe ele
+		// o mais increivel eh que:
+			NAO PRESISOU DAR UM UPDATE NO BANCO
+	+ Em cadastro, ele recebe o *{codigo}, como um campo que sera lançado
+		depois
+	+ Vamos editar as nossa coisas, pra cada url do codigo, editamos cada uma
+	+ O "@" eh pra montar links do thymelaef, de forma dinamica, pois eu defino
+		variaveis que serao definidas depois na no item to tymeleaf.
+		--> uma ideia semelhante a manter os valores nos campos
+		--> Isso eh possievl pois na def. do from, esta recebendo um titulo
+
+Aula 2.16 - Exclusao/DELETE
+{modal do bootstrap (usa JS e fica na parte de JS do site)
+	+ como o modal usa js, tenho que criar um js pra mexer melhor nele
+
+==================================================================================
+==================================================================================
+==================================================================================
+
+aula 3.01 -tooltip (27.10.2017)
+{bootstrap-tooltip}
+	+ usa JS
+	+componente do bootstrap pra quando aghete colocar o muse emcima
+	do item, eaparecça sua descriçao pequenininha
+
+aual 3.02 - calendar
+{bootstrap-datapicker}
+	+ datepicker eh um calendario JS
+	+ eh necessario baixar coisa do github
+	link aqui: https://github.com/uxsolutions/bootstrap-datepicker/blob/master/dist/css/bootstrap-datepicker.standalone.min.css
+
+aula 3.03 - colocar separador de dinheitro automatico
+	+ no link: https://github.com/plentz/jquery-maskmoney/blob/master/dist/jquery.maskMoney.min.js
+
+
+aula 3.04 - camada de serviço pra por regra de negocio
+{@Service, e padrao arquitetural com Service}
+	+ essa camada de serviço envolve regra de negocio 
+	+ regra de negocio eh colocada na camada de serviço, pois o controller
+		serve como regra de navegação. usamos a anotaçao @Service
+		para poder dizer que eh um componente Spring, ou seja,
+		ao fazer isso, eu posso injetálo em outras classes. 
+		Eu poderei fazer algo parecido com @Autowired do JPA
+	+ Aqui eh importante, no controller, nao deve ter as coisas de business
+		deve ter somente a navegaçao, nele deve ter um item de
+		service que saera acessado e nele sim que faremos as reqSQL
+
+aula 3.05 - ajax (no recebimento, que vai mudar o status sem dar refresh pelo JS)
+{fazer requisiçoes AJAX, vantagem: nao vai dar refresh}
+	+ com ela, usaremos scripts JS em vez do brwoser para ir ao framwork
+	+ Do controller, agora, pode ser qua mandemos um objeto o que faz com
+		que nao presisemos mandar uma view
+	+ as views e o objeto voltam para o JS, e, no JS, eu posso editar o DOM
+		e assim toranria muito mais dinâmico do que já está
+	+ Com isso, vamos atualizar partes da tela sem mexer muito
+
+aula 3.06 - ajax2
+{colocar icone,}
+	+
+
+	
+aula 3.07 - ajax3
+{@ResponseVariable, JS atualiza sem dar refresh}
+	+ {@ResponseVariable} serve no controller, pra querer dizer que o controler
+		vai retoranar uma string  que nao eh uma nova view HTML, eh uma
+		string que sera usada no JS
+	+ no fim eu retorno subistituindo o span por outro
+	
+aula 3.09 - pesquisa de titulo
+	+ o spring jpa consegue implementar por nome as consultas que queremos
+		basta procrura na doc do Spring Data JPA, isso eh muito legal
+		pois assim nem presisa saber nada de SQL
+
+aual 3.11 - deploy no tomcat
+{maven, contextPath (o @ do thymealeaf, procamos href por th:href, pra funcionar)
+	+ feito um clean package pra gerar um war
+	+ gerou um monte de coisa no target, inclusice um WAR
+	+ Colocamos o WAR no webapps do tomcat, 
+	+ com o context Path ==> th:ref="@...." o tomcat vai consultar
+		corretamente os recursos de JS/CSS, pois, deixando
+		so o href, nao vai direcionar direito no DEPLOY
+	+ O certo eh desenvolver colocando sempre o @

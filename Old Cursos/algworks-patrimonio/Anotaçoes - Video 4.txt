@@ -1,0 +1,32 @@
+Respondendo a Dúvidas
+
+# Eh seguro deixar o front-end exposto
+
+	+ Resposta: sim, pois a parte de segurança deve ser feita no back-end,
+		toda a parte de segurança deve ser feita pela API/
+	+ O front nao recebe nada de segurança. Agente ate pode validar campos
+		no front pra ficar legal, mas, isos deve ser realmente feito
+		no back-end. Agnt valida no FRONT para que o usuario ja saiba que 
+		inserir dados errados nao vai funcionar, o que melhora a
+		usuabilidade do software
+
+# Como funciona a SEGURANAÇ no RESTFUL
+
+	+ No modelo cliente servido, o usuario inicia enviando um
+		usuario e senha e o servidor retorna um cookie e que tambem fica
+		armazenado no servidor. enfim, eh usando SESSION
+
+	+ Agora, na nossa API Rest (Tomcat com SpringBoot).
+		Agente mandaria user/senha, e, a APIRest retorna um TOKEN. A API 
+		rest eh StateLess, ela no mantem estado. Assim se der algo de
+		errado nela, agnt nao perde usuario
+			NAO HÁ SESSION
+		quando volta uma req. do cliente, o cliente manda de volta um
+		token, e, ai, volta JSON.
+
+# Se eu usar uma blbioteca de components eu fico preso a ela?
+
+	+ Sim e nao. Todas essas bibliotecas possuiem algo chamado TEMA/THEMES
+		Elas mudam em geral as cores e umpouco a forma visual dos 		compontens como um todo, como globalmente
+		
+

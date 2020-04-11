@@ -1,0 +1,67 @@
+	Videos 3 - Angular - Fornt End
+
+# vsc: Vamos usar Visual Studio Code pra editar o Time Script, chamdao VS code
+
+
+# node js: plataformar pra construir app em JS que roda no servidor, o angular nao presisa pois roda no navegador, mas nos presisamos no node no desenvolvimento pra programar
+
+
+# npm: gerenciador de pacotes, eh como um maven para o javascript
+
+
+# angular cli: serve pra agilizar a programaçao do angular, uma instalal
+	+ a partir do npm, vamos executar o comando, g --> globla == no PC:
+		>npm install -g @angular/cli 
+	+ abrir o servidor no visual studio code, procuramos o terminal e 
+	  digitamos'ng serve', serve pra agnt testa. vai ficar na porta 4200
+		> ng serve
+	+ criar um projeto, como no meven:
+		> ng new [nome-proj]
+# cmd:
+	-verifica com node -v e nmp -v pra ver se ta instalado no shell
+	-clear no shell pra limpar a tela
+	- verifica se o angular cli ta instalado usando ng -v
+
+# Key Short: 
+	https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference
+
+
+# Inicio Real aos 9 minutos
+
+	+ uma app angular presia de pelo menos um modulo, este foi o
+		src/app/app.mode.js 
+	+ Possui metas informaçoes no @NgModule
+	+ ele declara AppComponent, que diz que app module tem ngmodule
+	+ a partir do app component agente comesa a add outros
+	+ em imposrt agnt adiciona modulos q o modulo depende
+		pode ser ja prontos na net ou algo nosso
+
+#app.component
+	+ responsavel por mostrar a view
+	+ ele possui uma classe que implementa a lógica
+		configuramos com o decorator componente
+	+ usa templates
+	
+	### INCICIO DA CONSTRUÇÃO ###
+
+# em app.component.html
+# Fazer a barra azul 'navebar' e, ela é um componente isolado, pra pordermo tambem reaproveitala no futuro
+
+# nav bar
+	+ digitamos no terminal
+		> ng g c navbar --spec=false
+	+ o -- spec=false eh pra nao cirar arq de teste
+	+ g de generate e c de component
+	+ Um componente pode usar outro
+
+# instalr prime ng == biblioteca de componentes
+	> npm install primeng --save
+	o save quer dizer que eh uma dependencia do projeto
+
+# gerar serviço
+	> ng g s {nome-service //coloca service na frente auto}
+
+#ctrl+c ==> mata o cmd
+# f12 pra poder ve as coisas no browser do googlechorme
+
+
