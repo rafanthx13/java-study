@@ -15,6 +15,10 @@
 
 `mvn --version`
 
+testar java
+
+`java -version`
+
 
 ## O que é o Maven?
 

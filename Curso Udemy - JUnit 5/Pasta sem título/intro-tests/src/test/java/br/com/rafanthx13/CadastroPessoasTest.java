@@ -3,8 +3,8 @@ package br.com.rafanthx13;
 import org.assertj.core.api.Assertions;
 //import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import br.com.rafanthx13.erros.CadastroVazioException;
-import br.com.rafanthx13.erros.PessoaSemNomeException;
+import br.com.rafanthx13.errors.CadastroVazioException;
+import br.com.rafanthx13.errors.PessoaSemNomeException;
 
 public class CadastroPessoasTest {
 	

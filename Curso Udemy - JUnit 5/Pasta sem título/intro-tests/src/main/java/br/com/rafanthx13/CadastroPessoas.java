@@ -3,6 +3,9 @@ package br.com.rafanthx13;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.rafanthx13.errors.CadastroVazioException;
+import br.com.rafanthx13.errors.PessoaSemNomeException;
+
 public class CadastroPessoas {
 
 	private List<Pessoas> pessoas;
@@ -17,14 +20,14 @@ public class CadastroPessoas {
 
 	public void adicionar(Pessoas pessoa){
 		if(pessoa.getNome() == null){
-			throw new br.com.rafanthx13.erros.PessoaSemNomeException();
+			throw new PessoaSemNomeException();
 		}
 		this.pessoas.add(pessoa);
 	}
 
 	public void remover(Pessoas pessoa){
 		if(this.pessoas.isEmpty()){
-			throw new br.com.rafanthx13.erros.CadastroVazioException();
+			throw new CadastroVazioException();
 		}
 		this.pessoas.remove(pessoa);
 	}
