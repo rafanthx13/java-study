@@ -4,7 +4,7 @@ package br.com.rafanthx13;
  * Hello world!
  *
  */
-public class Pessoa {
+public class Pessoas {
 
 	private String nome;
 

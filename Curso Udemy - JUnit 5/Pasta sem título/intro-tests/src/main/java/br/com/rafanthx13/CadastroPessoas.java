@@ -11,21 +11,21 @@ public class CadastroPessoas {
 		this.pessoas = new ArrayList<>();
 	}
 
-	public List<Pessoa> getPessoas(){
+	public List<Pessoas> getPessoas(){
 		return this.pessoas;
 	}
 
-	public void adicionar(Pessoa pessoa){
+	public void adicionar(Pessoas pessoa){
 		if(pessoa.getNome() == null){
-			throw new PessoaSemNomeException();
+			throw new br.com.rafanthx13.erros.PessoaSemNomeException();
 		}
 		this.pessoas.add(pessoa);
 	}
 
-	public void remover(Pessoa pessoa){
+	public void remover(Pessoas pessoa){
 		if(this.pessoas.isEmpty()){
-			throw new CadastroVazioException();
+			throw new br.com.rafanthx13.erros.CadastroVazioException();
 		}
-		this.pessoas.add(pessoa);
+		this.pessoas.remove(pessoa);
 	}
 }

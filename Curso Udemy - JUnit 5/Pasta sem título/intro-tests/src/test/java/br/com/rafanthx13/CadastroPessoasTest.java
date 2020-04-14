@@ -1,6 +1,10 @@
 package br.com.rafanthx13;
 
+import org.assertj.core.api.Assertions;
+//import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import br.com.rafanthx13.erros.CadastroVazioException;
+import br.com.rafanthx13.erros.PessoaSemNomeException;
 
 public class CadastroPessoasTest {
 	
@@ -13,7 +17,7 @@ public class CadastroPessoasTest {
 	@Test
 	public void deveAdicionarUmaPessoa(){
 		CadastroPessoas cadastro = new CadastroPessoas();
-		Pessoa pessoa = new Pessoa();
+		Pessoas pessoa = new Pessoas();
 		pessoa.setNome("Wilson");
 
 		cadastro.adicionar(pessoa);
@@ -21,10 +25,10 @@ public class CadastroPessoasTest {
 		Assertions.assertThat(cadastro.getPessoas()).isNotEmpty().hasSize(1).contains(pessoa);
 	}	
 
-	@Test(expect = PessoaSemNomeException.class)
+	@Test(expected  = PessoaSemNomeException.class)
 	public void naoDeveAdicionarPesosaSemNome(){
 		CadastroPessoas cadastro = new CadastroPessoas();
-		Pessoa pessoa = new Pessoa();
+		Pessoas pessoa = new Pessoas();
 
 		cadastro.adicionar(pessoa);
 	}
@@ -33,7 +37,7 @@ public class CadastroPessoasTest {
 	public void deveRemoverUmaPessoa(){
 		// scenario
 		CadastroPessoas cadastro = new CadastroPessoas();
-		Pessoa pessoa = new Pessoa();
+		Pessoas pessoa = new Pessoas();
 		pessoa.setNome("Wilson");
 		cadastro.adicionar(pessoa);
 		// execution
@@ -42,11 +46,11 @@ public class CadastroPessoasTest {
 		Assertions.assertThat(cadastro.getPessoas()).isEmpty();
 	}
 
-	@Test( expect = CadastroVazioException.class )
+	@Test( expected  = CadastroVazioException.class )
 	public void deveLancarErrroAoTentarRemoverPessoaInexistente(){
 		// scenario
 		CadastroPessoas cadastro = new CadastroPessoas();
-		Pessoa pessoa = new Pessoa();
+		Pessoas pessoa = new Pessoas();
 		// execution
 		cadastro.remover(pessoa);
 	}
