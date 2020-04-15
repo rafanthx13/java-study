@@ -1,0 +1,55 @@
+
+## REST
+
+Represeentational State Tranfer: 
++ É um deseign de arquitetura.  Cada recurso é cedido atraves de uma URL específica
++ FUnciona no modelo REQUEST (req) -> RESPONSE (res) onde há troca de mensagesn e na res há um código de status 
++ Statelss(ele nâo guarda estado, cada reuisiçâo é tratada como completamente distaitnas uma das outras. Nâo guarda nenhuma informaçâo sobre o cliente
+
+
+## Verbos HTTP
+
+POST: (Cria recurso)
++ Cria recurso Novo
++ Resposta de Sucesso: 201 (CREATED)
+
+GET: (Obter recurso)
++ Pode envicar paramtetros para seresm critérios de busca
++ Resposa de Sucesso: 200 (OK)
++ Resposta de erro: 404 (NOT FOUND) (Quando o recurso nâo foi encontrado)
+
+PUT (Atualizar recurso)
++ ENvio o mesmo recurso mas com alguns pontos atualizados
++ Resposta de Sucesso: 200 (OK)
+
+DELETE
++ Deleta recurso
++ Resposta de Sucesso: 204 (NO CONTENT)
+
+## Como estruturar
+
++ Na URL nÂo deve ter verbos, pois os rebos sâo os métodos HTTPP
++ Cada recurso tem um ID que é usado para identificalo
+
+EX:
+
+POST	/clientes	cria
+GET	/clientes/1	recupera
+DELETE	/clientes/1	deletea
+PUT	/clientes/1	atualiza
+
+Acessar subrecursoso
+
+/cliente/1/enderecos/1
+Acesso o endereço de ID 1 do cliente 1
+
+Código de Status
+
+| Verbo  | Sucesso          | Falha             |
+| ------ | ---------------- | ----------------- |
+| POST   | 201 (CREATED)    | 400 (BAD CONTENT) |
+| GET    | 200 (OK)         | 404 (NOT FOUND)   |
+| DELETE | 204 (NO CONTENT) | 400 / 404         |
+| PUT    | 200 (OK)         | 400 /404          |
+
+PUT
