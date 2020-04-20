@@ -53,3 +53,9 @@ Código de Status
 | PUT    | 200 (OK)         | 400 /404          |
 
 PUT
+
+## OBS IMPORTANTES
+
+**TODAS AS ENTIDADE SÂO ESCRITA EM PLURAL, nâo é `/book` é `/books`**
+
+**É bom nâo deixar a entidade de cara, e sim colocar algo na frente como `/v1/books` ou `/api/v1/books` pra ja pensar no futuro**
