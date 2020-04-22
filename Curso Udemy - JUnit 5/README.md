@@ -17,119 +17,290 @@
 + Configuração de Deploy Contínuo
 + Gerar o build da aplicação e fazer o deploy de sua API na nuvem
 
-## Descriçâo do Projeto Realizado
+## Descrição do Projeto Realizado
 
 ### API REST Library
 
-Livraria para cadastro e empréstimo de livros
+Livraria Simples para cadastro e empréstimo de livros incluindo testes unitários para cada parte:
 
-+ Controllers: Implementa a primeira camada do REST, REcebe as solicitações. Testes Unitários
++ Controllers: Implementa a primeira camada do REST, recebe as solicitações.
 
-+ Services: IMplementadaos regras de negócio. Testes Unitários
++ Services: Implementados regras de negócio.
 
-+ REpository: Cmada de modelo e acesso ao BD. Testse de INtegração
++ Repository: Camada de modelo e acesso ao BD (inclui Testes de Integração)
 
 ## Estrutura de pastas
 
-dto (Data transfer object)
-+ Representa o JSON de uma entidade. É o que é recebido e enviado de volta pelo controller. EM geral, acaba sendo convertido par auma `entity` que em memória é o que vai ser salvo na banco ou trabalhado
-+ Representa qualquer tipo de JONS ao ser mandao pra Base, como por exemplo ReturnedLoanDTO que só tem uma única ṕropriedade para fazer o path (atualizar) um único campo
-+ Porque usar DTO
-````
-Data Transfer Object (DTO) ou simplesmente Transfer Object é um padrão de projetos bastante usado em Java para o transporte de dados entre diferentes componentes de um sistema, diferentes instâncias ou processos de um sistema distribuído ou diferentes sistemas via serialização.
+**data.dto (Data transfer object)**
 
-A ideia consiste basicamente em agrupar um conjunto de atributos numa classe simples de forma a otimizar a comunicação.
++ Representa o JSON de uma entidade ou de qualquer coisa enviada ou retornada da API. É o que é recebido e enviado de volta pelo controller. EM geral, acaba sendo convertido para uma `entity` que em memória é o que vai ser salvo na banco ou trabalhado
+  + Exemplo ReturnedLoanDTO que só tem uma única propriedade para fazer o path (atualizar) um único campo
++ Porque usar DTO?
+  - Data Transfer Object (DTO) ou simplesmente Transfer Object é um padrão de projetos bastante usado em Java para o transporte de dados entre diferentes componentes de um sistema, diferentes instâncias ou processos de um sistema distribuído ou diferentes sistemas via serialização.
 
-Numa chamada remota, seria ineficiente passar cada atributo individualmente. Da mesma forma seria ineficiente ou até causaria erros passar uma entidade mais complexa.
+  - A ideia consiste basicamente em agrupar um conjunto de atributos numa classe simples de forma a otimizar a comunicação.
 
-Além disso, muitas vezes os dados usados na comunicação não refletem exatamente os atributos do seu modelo. Então, um DTO seria uma classe que provê exatamente aquilo que é necessário para um determinado processo.
+  - Numa chamada remota, seria ineficiente passar cada atributo individualmente. Da mesma forma seria ineficiente ou até causaria erros passar uma entidade mais complexa.
 
-Em alguns casos, usa-se o DTO ou TO para mapear informações obtidas do banco de dados e então usar numa View (MVC). Isso não é completamente errado, e até pode otimizar a apresentação dos dados, afinal o Controller já recebe as informações prontas para uso. Entretanto, isso pode também acabar em um modelo muito poluído com informações redundantes.
+  - Além disso, muitas vezes os dados usados na comunicação não refletem exatamente os atributos do seu modelo. Então, um DTO seria uma classe que provê exatamente aquilo que é necessário para um determinado processo.
 
-Quando tenho um domínio bem estruturado, prefiro criar beans que representam esse modelo. Esses beans geralmente são chamados de Entidades. Aí, em determinados casos (como em certas pesquisas no banco de dados baseadas em views ou que possuem joins ), crio um tipo de TO ou DTO para facilitar o transporte desses dados.
-```
+**data.entity**
 
-entity
-+ Estrutura gerenciar uma entidade na aplicaçâo java. Geralmente é convertida do dto quando chega a req e geralmemnte vira uma dto ao sair para o response
-+ Não mandasmo entity para o cliente para nâo exibir certas propriedadea. Observe os "Get filted" para ver como é a conversão
++ Estrutura para gerenciar uma entidade na aplicação java. Geralmente é convertida no dto quando chega a requisição e na resposta da entidade em dto
+  + Não mandamos `entity` para o cliente para não exibir certas propriedade. Observe os "Get filted" para ver como é a conversão
 
-data.respotirry
-+ ENtidade para fazer acesso ao banco
-+ Feita de interfaces que implementam  'JpaREpository' que recebem por aprametos na sua definiçao o tipo deo objeto do banco e o tipo de seu ID.
-+ Sâo interfaces e nâo precisam de implementaçâo pois o JPA já faz isso
+**data.respotory**
 
-service
++ Entidade para fazer acesso ao banco
++ Feita em interfaces que implementam  'JPARepository' que recebem por parâmetos na sua definição o tipo de objeto do banco e o tipo de seu ID.
++ São interfaces e não precisam de implementação pois o JPA já faz isso
+
+**service**
+
 + interface com os métodos a serem implementados
++ Porque usar `Service` e `ServiceImpl`?
+  + O uso de interfaces no java visa atender à uma característica da POO que é o polimorfismo. Você possui uma estrutura básica que poderá ser implementada de N maneiras. Como exemplo, a interface List do java.util que pode implementar ArrayList, por exemplo.
+    Além disso, caso você esteja utilizando um framework de IoC, como o Spring, precisará manter uma estrutura condizente com a injeção dos objetos, necessárias para o framework.
 
-service.impl
-+ classe que implementa um service, é nela que havera impleemntaçâo de métodos. Posusi internamente o repository para fazer as operações no banco
+**service.impl**
 
-controller
-+ Repsonde as req e dá a res
++ classe que implementa um service, é nela que havera implementação de métodos. Possui internamente o repository para fazer as operações no banco
+
+**controller**
+
++ Responde as *requisições* e dá a *response*
 + ApplicationControllerAdvice.java
-    - Esses métodos serâo globais para toda a API
-	- Tem @RestControllerAdvice: (Essa classe tem configuraçêos globais para todos os controllers) Permite inserirr configs a todos os controllers. Nele colocamoms @ExceptionHandler, ou seja, tratamos de exceptions que darem no Controller
+    - Possui handles globais para todos os controllers
+	- Tem @RestControllerAdvice: (Essa classe tem configurações globais para todos os controllers) Permite inserir configs a todos os controllers. Nele colocamos `@ExceptionHandler`, ou seja, tratamos de exceptions que darem no Controller
 
 ----
 
-TESTS
+**Estruturas dos Testes**
 
-ControllerTest
-+ Testa a chamada da URL. Faz HTTP Request. Passa-se DTO. Faz MOck do service
+ControllerTests
++ Testa a chamada da URL. Faz HTTP Request. Passa-se DTO e esparece voltar DTO (JSON). 
++ Faz Mock do service
 
-ServiceTest
-+ Testa o Service. Não faz HTTP Request, é como se já estive-se dentro do backEnd. Passa-se a entidade @JPA. Faz Mock de repository
+ServiceTests
++ Testa o Service. Não faz HTTP Request, é como se já estive-se dentro do BackEnd, na hora em que o ControllerTest chama o service e utiliza uma entidade
++ Faz Mock de repository
 
-REpositoryTest
-+ Testa Repository. Nâo faz HTTP REQUEST. Usa-se Entity @JPA
-+ Usa o banco H2 ; Notaçâo @DataJpaTest. Agente faz CREATE, UPDATE, DELETE, READ direto desse banco e testamos a nossa entidade de repository pra saber se TUDO QUE O REPOSITORY FAZ ESTÁ FAZENDO CORRETMANETE DEPOIS QUE ELE FAZ.
+RepositoryTest
++ Testa Repository. Não faz HTTP Request. Usa-se Entidade
++ Usa o banco H2 ; Notação @DataJpaTest. Agente faz CREATE, UPDATE, DELETE, READ direto desse banco e testamos a nossa entidade de repository pra saber se TUDO QUE O REPOSITORY FAZ ESTÁ FAZENDO CORRETAMENTE DEPOIS QUE ELE FAZ.
+
+**Como fica então essa estrutura de testes**
 
 
-Famos assim pois, ao fazer o TDD de um Controller, por exemplo. Eu nâo preciso implementar o service, apenas simular com o MOck. Isso faz com que **CADA TESTE DE CADA TIPO (CONTROLLER/SERVICE/REPOSITORY) FIQUEM BEM SEPARADOS E INDEMEPENTES. ASSIM, QUANDO EU FAÇO O TEST DE CONTROLLER EU NÂO PRECIO DO SERVICE/REPOSITORY FUNCIONANDO 100% IMPLEMENTADO, PRECISO QUE APENAS EXISTA COM OS MÉTODOS (DEIXAR SOMENTE COM AS ASSINATURAS DA INTERFACE). ASSIM AS COISAS FICÃO BEM SEPARADAS NÂO DEPENDENDO DA IMPLEMENTAÇÂO DOS OUTROS TIPOS PARA FAZER SEU PRÓPRIO TESTE**.
+Ao fazer o TDD de um Controller, por exemplo. Eu não preciso implementar o service, apenas simular com o Mock o seu retorno ou algum erro que der. Isso faz com que cada teste de cada tipo (controller, service, repository) fiquem bem separados e independentes. assim, quando eu faço o test de controller eu no precio do service/repository funcionando 100% implementado, preciso que apenas exista com os métodos (deixar somente com as assinaturas da interface). assim as coisas ficão bem separadas não dependendo da implementação dos outros tipos para fazer seu próprio teste.
 
-Assim, para fazer um COntrollerTest, você só precisa está implementado O respectivo controller, nao presia do service e nem do repository, pois estse sâo mockados. Asism, permite o deenolviemtno do TDD fazendo
+Assim, para fazer um ControllerTest, você só precisa que o respectivo controller esteja implementado O respectivo controller, não precisa do service e nem do repository, pois estes são mockados. 
+
+Assim, permite o desenvolvimento do TDD na seguinte ordem para cada funcionalidade da api:
 
 ControllerTest -> Controller
 ServiceTest -> Service e ServiceImpl
-REpositoryTest -> Repository
+RepositoryTest -> Repository
 
-Os testes do Repsoitory sao os úncios que relamente usa o banco, mas o banco a ser usado é soemtne um banco dememória
----
+Os testes do Repository são os únicos que realmente usa o banco, mas o banco a ser usado é somente um banco de memória
 
-# OUTRAS COISAS QUE VOU COLOCAR AQUI POR ENQUNATO
 
-## Lombok
-obs: precisa de plugin
 
+## Exemplos dos Tests para Salvar um Livro
+
+### ControllerTest
+
+```java
+@Test
+@DisplayName("Deve criar um livro com sucesso")
+public void createBookTest() throws Exception{
+
+    BookDTO dto = createNewBook();
+
+    Book savedBook = Book.builder().id(10l).author("Artur")
+        .title("As aventuras").isbn("001").build();
+
+    BDDMockito.given(service.save(Mockito.any(Book.class))).willReturn(savedBook);
+
+    String json = new ObjectMapper().writeValueAsString(dto);
+
+    MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+        .post(BOOK_API)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
+        .content(json)
+        ;
+	// Verifica se retornou o JSON desejado
+    mvc
+        .perform(request) 
+        .andExpect( status().isCreated() )
+        .andExpect( jsonPath("id").value(10l) )
+        .andExpect( jsonPath("title").value(dto.getTitle()) )
+        .andExpect( jsonPath("author").value(dto.getAuthor()) )
+        .andExpect( jsonPath("isbn").value(dto.getIsbn()) )
+        ;
+}
+```
+
+### Controller
+
+```java
+@RestController // Controlador Rest
+@RequestMapping("/api/books") // Base URL
+public class BookController {
+
+  private BookService service;
+  private ModelMapper modelMapper; // Mapeia de DTO a Entity
+
+  public BookController(BookService service, ModelMapper modelMapper){
+    this.service = service;
+    this.modelMapper = modelMapper;
+  }
+
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public BookDTO create(@RequestBody @Valid BookDTO dto){
+    Book entity = modelMapper.map(dto, Book.class);
+    entity = service.save(entity); // retorna o dado inserido
+    return modelMapper.map(entity, BookDTO.class);
+  }
+```
+
+### ServiceTest
+
+````java
+@ExtendWith(SpringExtension.class)
+@ActiveProfiles("test")
+public class BookServiceTest {
+
+  BookService service;
+
+  @MockBean
+  BookRepository repository;
+
+  @BeforeEach
+  public void setUp(){
+    this.service = new BookServiceImpl(repository);
+  }
+
+  @Test
+  @DisplayName("Deve salvar um livro")
+  public void saveBookTest() {
+      // cenario
+      Book book = createValidBook(); 
+      Mockito.when(repository.existsByIsbn(Mockito.anyString()) ).thenReturn(false);
+    
+      Mockito.when(repository.save(book)).thenReturn(
+              Book.builder().id(1l)
+                      .isbn("123")
+                      .author("Fulano")
+                      .title("As aventuras").build()
+      );
+      //execucao
+      Book savedBook = service.save(book);
+      //verificacao
+      assertThat(savedBook.getId()).isNotNull();
+      assertThat(savedBook.getIsbn()).isEqualTo("123");
+      assertThat(savedBook.getTitle()).isEqualTo("As aventuras");
+      assertThat(savedBook.getAuthor()).isEqualTo("Fulano");
+  }
+}
 ````
+### Service
+
+````java
+@Service
+public class BookServiceImpl implements BookService {
+  
+  private BookRepository repository;
+
+  public BookServiceImpl(BookRepository repository) {
+    this.repository = repository;
+  }
+
+  @Override // Indica que sobrescreveu metodo da interface
+  public Book save(Book book) {
+      if( repository.existsByIsbn(book.getIsbn()) ){
+          throw new BusinessException("Isbn já cadastrado.");
+      }
+      return repository.save(book);
+  }
+}
+````
+### RepositoryTest
+
+````java
+@ExtendWith(SpringExtension.class) 
+@ActiveProfiles("test")
+@DataJpaTest
+public class BookRepositoryTest {
+   
+	@Autowired 
+    TestEntityManager entityManager;
+    
+    @Autowired
+    BookRepository repository;
+    
+    @Test
+    @DisplayName("Deve salvar um livro.")
+    public void saveBookTest(){
+        Book book = createNewBook("123");
+        Book savedBook = repository.save(book); 
+        assertThat( savedBook.getId() ).isNotNull(); // verifica se retornou livro
+    }
+}
+````
+### Repository
+
+````java
+public interface BookRepository extends JpaRepository<Book, Long> {
+
+	// Não há metodo save, pois este já está dentro do JPA
+
+  boolean existsByIsbn(String isbn);
+
+  Optional<Book> findByIsbn( String isbn);
+
+  
+}
+````
+
+## Dependências
+
+### Lombok
+
+Plugin Maven
+
+````xml
 <dependency>
 	<groupId>org.projectlombok</groupId>
 	<artifactId>lombok</artifactId>
 	<optional>true</optional>
 </dependency>
 ````
-OBS: Lombok é uma dependeic amas tamme é um plug-in no inteliJ. Isos tem que ser colado porque ele gera métodos em tempo de execuçâo, entâo, se nao colcoar o plugin, vai acusar porque vc vai chamar metodos que nao exsitem, mas que so existem no lobok.
 
-Deve-se instalar um plugin na IDE que vai fazer o build, senao da erro de sintaxe e de compilaçÂo tambem (Sei que existe para VScode (extensao) e INteliJ (plugin))
+Lombok é uma dependência mas também é um plugin no inteliJ/VSCode para não dá erro de sintaxe e nem de `build`. Isso tem que ser colado porque ele gera métodos em tempo de execuçâo, entâo, se nao colocar o plugin, vai acusar porque você vai chamar métodos que não existem, mas que só existem no lobok.
 
-@Data
--> cria getres, setre, toString e isEquals e HasCode
-@Getter
-@Setter
+Injeção de Dependências do Lombok
+
+@Data   -> cria getres, setre, toString e isEquals e HasCode
+@Getter -> Gera getters
+@Setter -> Gera setters
 @Builder
--> Gera um método que permite setar os dados de forma mais legível
--> coisas como `Book.builder().id(10l).author("Artur").title("As aventuras").isbn("001").build();`
+|==> Gera um método que permite setar os dados de forma mais legível
+|==> coisas como `Book.builder().id(10l).author("Artur").title("As aventuras").isbn("001").build();`
 @NoArgsContructor
 @AllArgsContructor
 
 #### @RequiredArgsConstructor
 
-Com essa notaçâp, nao precisa fazer o contrutor da classe nela. Já vai ta tudo pronto
+Com essa notação, não precisa fazer o construtor da classe nela. Já vai ta tudo pronto
 `@RequiredArgsConstructor`
 
-Isso pode ser convertido nisso
-````
-  // BookController.java
+Isso pode ser convertido disso (em `BookController.java`).
+
+````java
+  // 
   private BookService service;
   private ModelMapper modelMapper;
 
@@ -139,23 +310,25 @@ Isso pode ser convertido nisso
   }
 ````
 
-````
+Para isso 
+
+````java
 @RequiredArgsConstructor // Com esas notação: LoanService, BookService e ModelMapper já vao ser criados e injetados
 public class LoanController {
 
 	private final LoanService service;
-    private final BookService bookService;
-    private final ModelMapper modelMapper;
+	private final BookService bookService;
+	private final ModelMapper modelMapper;
 ````
 
 
-## ModelMapper
+### ModelMapper
 
 http://modelmapper.org/getting-started/
 
 Mapeia de uma classe para outra quando tem atributo muito aprecidos
 
-````
+````xml
 <dependency>
   <groupId>org.modelmapper</groupId>
   <artifactId>modelmapper</artifactId>
@@ -163,22 +336,24 @@ Mapeia de uma classe para outra quando tem atributo muito aprecidos
 </dependency>
 ````
 
-Para usar temos que crirar na main
+Para usar temos que criar um BEAN no main
 
-````
-	// O spring vai gera um único Singleton apra toda a aplicação
-	@Bean
+````java
+@SpringBootApplication
+public class LibraryApiApplication {
+	
+	@Bean // O spring vai gera um único Singleton apra toda a aplicação
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}
+}
 ````
 
-Depois costuma-se usar nos Controllers. COmo no exemplo abaixo: converto de dto (dto representa o json da entidade) em uma entidade (entity é a entidade em memoria) e depois converto de volta na saida
-
+Depois costuma-se usar nos Controllers. Como no exemplo abaixo: converto de dto (dto representa o json da entidade recebida) em uma entidade (e depois converto de volta na saida.
 
 ````java
-@RestController // Controlador Rest
-@RequestMapping("/api/book") // Base URL
+@RestController 
+@RequestMapping("/api/book") 
 public class BookController {
 
   private BookService service;
@@ -192,113 +367,12 @@ public class BookController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public BookDTO create(@RequestBody BookDTO dto){
-    // converto dto em uma entity Book !!!!!!!!!!!!!!!!!!!!! AQUI
+    // !!! Converto de dto em uma entity
     Book entity = modelMapper.map(dto, Book.class);
     entity = service.save(entity);
-    // AO voltar, converto de uma entity apra dtp !!!!!!!!! AQUI
+    // !!! Converto de entity para DTO
     return modelMapper.map(entity, BookDTO.class);
-    
-
-    
   }
-  
-}
-````
-
-Está convertendo dois objetos
-
-````java
-package br.com.rafanthx13.libraryapi.data.entity;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-// lobok
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class Book {
-
-  private Long id;
-
-  private String title;
-
-  private String author;
-
-  private String isbn;
 
 }
 ````
-
-````java
-package br.com.rafanthx13.libraryapi.data.dto;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
- compilação
-@Getter
-@Setter
-@Builder 
-@NoArgsConstructor // Gera um construtor sem argumento
-@AllArgsConstructor
-public class BookDTO {
-    private Long id;
-
-    private String title;
-
-    private String author;
-
-    private String isbn;
-  
-}
-````
-
-## Outros detalhes
-
-
-### LocalDate
-
-Caracteriza uma data
-````
-import java.time.LocalDate; // Data
-...
-@Column
-    private LocalDate loanDate;
-````
-
-
-
------
------
------
------
-
-Servidor de Email: AGENDAMENTO DE TAREFAS: VOu configurar para todo dai executar uma funçâo. Vmaos fazer com que todos os dias sejam enviados um email para quem pegou um livro emprestado mas nâo devolveu.
-
-Vamos usar uma API De Schedule
-
-Adiciono
-+ @EnableScheduling no Main
-+ @Schedule: Notaçâo que identifica que é uma tarefa agendada
-+ @Schedule(cron = "0 4 13 1/1 * ?") Define quando será executado. Ele é definido através de uma pequena expressão. É escrito ao crontŕaio: vocÊ escreve em ordem:
-	segundos - minutos - hora
-+ http://www.cronmaker.com/
-	Exemplo do Crom-maker
-	0 4 13 1/1 * ?
-	ai você coloca só 6 caracteres
-	0 4 13 1/1 *
-+ Aí, quando der esse horário, ele vai executar essa tarefa
-
-````@Schedule(cron = "0 4 13 1/1 * ?")
-public void testesSchedule(){
-	System.out.println("All");
-}
-
-
