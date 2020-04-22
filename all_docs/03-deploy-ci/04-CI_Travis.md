@@ -51,6 +51,8 @@ O que é: O Travis CI é um serviço de integração contínua hospedado, usado 
 
 ### Como fazer
 
+**Tem que ter a pasta .mvn/wrapper/ e todos os seus arquivos**
+
 Cria o arquivo `.travis.yml`
 
 
@@ -67,3 +69,10 @@ Onde
 + Jdk será o Java8
 + Dist: trusty (Serve para dizer que essa distribuição é uma distribuição confiável), pois o Travis vai rodar nas versões Java masi atuais
 + `before_install: \n - chmod +x mvnw`: Isso permite que no build lá no travis possa acessar esse arquivo, pois ele vai pedir para exeuctar e não terá acesso
+
+Para conectar ao CodeCov
+
+````
+after_success:
+ - bash <(curl -s https://codecov.io/bash)
+````

@@ -1,6 +1,7 @@
 package br.com.rafanthx13.libraryapi.controller;
 
 import org.modelmapper.ModelMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -17,20 +18,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.rafanthx13.libraryapi.data.dto.BookDTO;
+import br.com.rafanthx13.libraryapi.data.dto.LoanDTO;
 import br.com.rafanthx13.libraryapi.data.entity.Book;
+import br.com.rafanthx13.libraryapi.data.entity.Loan;
 import br.com.rafanthx13.libraryapi.service.BookService;
+import br.com.rafanthx13.libraryapi.service.LoanService;
 
 @RestController // Controlador Rest
 @RequestMapping("/api/books") // Base URL
+@RequiredArgsConstructor // Gera e injeta os objetos privados
 public class BookController {
 
-  private BookService service;
-  private ModelMapper modelMapper;
+  private final BookService service;
+  private final ModelMapper modelMapper;
+  private final LoanService loanService;
 
-  public BookController(BookService service, ModelMapper modelMapper){
-    this.service = service;
-    this.modelMapper = modelMapper;
-  }
+  // Nâo precisa por causa do @RequiredArgsConstructor
+  // public BookController(BookService service, ModelMapper modelMapper){
+  //   this.service = service;
+  //   this.modelMapper = modelMapper;
+  // }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)

@@ -1,18 +1,13 @@
 package br.com.rafanthx13.libraryapi.service.impl;
 
-// import java.util.Optional;
-
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-// import java.util.Collections;
-// import java.util.List;
 import java.util.Optional;
 
 import br.com.rafanthx13.libraryapi.data.entity.Book;
 import br.com.rafanthx13.libraryapi.data.repository.BookRepository;
 import br.com.rafanthx13.libraryapi.exception.BusinessException;
-// import br.com.rafanthx13.libraryapi.exception.BusinessException;
 import br.com.rafanthx13.libraryapi.service.BookService;
 
 @Service
@@ -47,19 +42,19 @@ public class BookServiceImpl implements BookService {
   }
   
 
-    @Override
-    public Page<Book> find( Book filter, Pageable pageRequest ) {
-        // VOu criar um Example de acordo com o filter, que será o critério apra buscar os livros filtrados
-        Example<Book> example = Example.of(filter,
-                ExampleMatcher // vai permitir fazer as configuraçôes
-                        .matching()
-                        .withIgnoreCase() // para as cosia do tipo string, encaixar tanto apra maisuculo quanto minusculo
-                        .withIgnoreNullValues() // se tiver passado algo null, vai ignorar
-                        .withStringMatcher( ExampleMatcher.StringMatcher.CONTAINING ) 
-                        // quando for comprar uma string, vai comparar com o seuginte critério: bastar ter um pedaço da palavra
-        ) ;
-        return repository.findAll(example, pageRequest);
-    }
+  @Override
+  public Page<Book> find( Book filter, Pageable pageRequest ) {
+      // VOu criar um Example de acordo com o filter, que será o critério apra buscar os livros filtrados
+      Example<Book> example = Example.of(filter,
+              ExampleMatcher // vai permitir fazer as configuraçôes
+                      .matching()
+                      .withIgnoreCase() // para as cosia do tipo string, encaixar tanto apra maisuculo quanto minusculo
+                      .withIgnoreNullValues() // se tiver passado algo null, vai ignorar
+                      .withStringMatcher( ExampleMatcher.StringMatcher.CONTAINING ) 
+                      // quando for comprar uma string, vai comparar com o seuginte critério: bastar ter um pedaço da palavra
+      ) ;
+      return repository.findAll(example, pageRequest);
+  }
 
   @Override
   public Optional<Book> getBookByIsbn(String isbn) {

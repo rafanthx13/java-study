@@ -28,6 +28,7 @@ import java.util.Optional;
 import br.com.rafanthx13.libraryapi.data.dto.BookDTO;
 import br.com.rafanthx13.libraryapi.data.entity.Book;
 import br.com.rafanthx13.libraryapi.service.BookService;
+import br.com.rafanthx13.libraryapi.service.LoanService;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

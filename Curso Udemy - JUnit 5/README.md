@@ -294,8 +294,15 @@ Injeção de Dependências do Lombok
 
 #### @RequiredArgsConstructor
 
+> https://www.baeldung.com/spring-injection-lombok
+
 Com essa notação, não precisa fazer o construtor da classe nela. Já vai ta tudo pronto
 `@RequiredArgsConstructor`
+
+
+
+**@RequiredArgsConstructor // Injeta objtos nos atributos privados. O obejto tem que ser 'FINAL'**
+**SO FUNCIONAN EM OBJETOS FINAL**
 
 Isso pode ser convertido disso (em `BookController.java`).
 

@@ -9,8 +9,7 @@ Métrica para medir a quantidade de código testado nos teste. O objetivo, demon
 Exemplo de dependência
 
 ````xml
-<!-- Plugin Jacoco de Java Code Coverage -->
-<!-- Quando executar mvn test, vai gerar o 'report' -->
+<!-- Plugin Jacoco (Java Code Coverage) -->
 <plugin>
 	<groupId>org.jacoco</groupId>
 	<artifactId>jacoco-maven-plugin</artifactId>
@@ -35,6 +34,43 @@ Exemplo de dependência
 Ao gerar o compile vai gerar dentro de `target/site/jacoco/index.html` vai gerar um relatório em HTML
 
 Ele mostra-rá uma porcentagem  para cada arquivo/pacote e também as linhas que foram testadas ou não.
+
+## Exluindo classes e pacotes
+
+No nosos projeto adicionando o seguinte fragmento de xml para o library-api
+
+````xml
+<configuration>
+	<excludes>
+	  <!-- Exclui packages da parte de dados, pois o que nâo é testado é 
+			coisas como 'ToString(), Equals() e etcc gerados pelo lombok -->
+	  <exclude>br/com/rafanthx13/libraryapi/data/dto/**/*</exclude>
+	  <exclude>br/com/rafanthx13/libraryapi/data/entity/**/*</exclude>
+	</excludes>
+</configuration>
+````
+**Mais exemplos de como remover certas classe/pacotes**
+
+> https://ngeor.com/2018/04/21/exclude-class-from-jacoco-coverage.html
+
+````xml
+<plugin>
+  <groupId>org.jacoco</groupId>
+  <artifactId>jacoco-maven-plugin</artifactId>
+  <version>0.8.5</version>
+  <configuration>
+    <excludes>
+      <!-- exclude classes in package com.acme.models whose name starts with Spring -->
+      <exclude>com/acme/models/Spring*</exclude>
+      <!-- exclude classes in package com.acme.api whose name ends with Api -->
+      <exclude>com/acme/api/*Api.class</exclude>
+      <!-- exclude all classes in package com.acme.generated -->
+      <exclude>com/acme/generated/**/*</exclude>
+    </excludes>
+  </configuration>
+</plugin>
+````
+
 
 ## Configurando CodeCov para dar a badge
 

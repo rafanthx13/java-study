@@ -40,7 +40,7 @@ management.endpoint.health.show-details=always
 management.endpoints.web.exposure.include=*
 ````
 
-Onde acessar: *localhost:8081/actuator*
+Onde acessar: *http://localhost:8080/actuator*
 
 **O que faz:** Retorna um JSON com algumas configurações de deploy e de funcionamento
 
@@ -56,7 +56,10 @@ Em `application.properties`, eu adiciono
 logging.file=appfile.log
 ````
 
-Acessando o actutor, ele vai adicionar um atributo no JSON de logfile, acessando ela você acessa o logfile que você criou. Esses dados serão fixados em um arquivo.
+Assim vai gerar os logs no arquivo `appfile.log` e vocÊ pode acessar esse arquivo pelo actuator através de: 
+http://localhost:8080/actuator/logfile
+
+Acessando o Actuator, ele vai adicionar um atributo no JSON de logfile, acessando ela você acessa o logfile que você criou. Esses dados serão fixados em um arquivo.
 
 ### Adicionar Logs manuais durante a execução de nossa API
 
@@ -93,7 +96,7 @@ Praticamente fazer o passo a passo do link abaixo
 
 ### O que é Spring Boot Admin
 
-O [***Spring Boot Admin\***](https://github.com/codecentric/spring-boot-admin) é um aplicativo Web, usado para gerenciar e monitorar aplicativos ***Spring Boot\***. Cada aplicativo é considerado como um *cliente* e se registra no servidor de administração do ***Spring Boot Admin\***. Nos bastidores, a mágica é feita pelos endpoints do *Spring Boot Actuator*. Veremos agora as etapas para configurar um servidor Spring Boot Admin e como o nosso aplicativo acima se torna um cliente.
+O [***Spring Boot Admin\***](https://github.com/codecentric/spring-boot-admin) é um aplicativo Web, usado para gerenciar e monitorar aplicativos Spring Boot. Cada aplicativo é considerado como um *cliente* e se registra no servidor de administração do ***Spring Boot Admin\***. Nos bastidores, a mágica é feita pelos endpoints do *Spring Boot Actuator*. Veremos agora as etapas para configurar um servidor Spring Boot Admin e como o nosso aplicativo acima se torna um cliente.
 
 Quem desenvolveu essa ferramenta foi uma empresa alemã chamada **codecentric’s**. É uma aplicação web, usando Spring Boot, que consegue consumir e monitorar outras aplicações que estejam usando o Spring Boot, com o *Spring Boot actuator* ativado. Ele te fornece informações sobre jvm, data source, acesso ao banco de dados, hd, informações sobre as requisições web, consegue até te enviar alertas por e-mail, integrando com outras ferramentas.
 
@@ -107,16 +110,12 @@ Cria projeto [ Spring Initalizr ](https://start.spring.io/)  com dependência we
 
 ```xml
 <dependencies>
+
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-    <!-- SpringBootAdmin Server Dependency -->
-    <dependency>
-        <groupId>de.codecentric</groupId>
-        <artifactId>spring-boot-admin-starter-server</artifactId>
-        <version>2.2.0</version>
-    </dependency>
+    
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
@@ -128,6 +127,14 @@ Cria projeto [ Spring Initalizr ](https://start.spring.io/)  com dependência we
             </exclusion>
         </exclusions>
     </dependency>
+
+	<!-- SpringBootAdmin Server Dependency -->
+    <dependency>
+        <groupId>de.codecentric</groupId>
+        <artifactId>spring-boot-admin-starter-server</artifactId>
+        <version>2.2.0</version>
+    </dependency>
+
 </dependencies>
 ```
 
@@ -135,7 +142,6 @@ Na aplicação main: coloque
 
 ```java
 // SpringBootAdminApplication.java
-package br.com.gcbrandao.springbootadmin;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
@@ -161,6 +167,8 @@ Como nosso projeto de testes já esta configurado para rodar na porta padrão 80
 server.port=8081
 ```
 
+E depois, **comente o arquivo de Test** que vem por padrão em um projeto Spring/Maven. Poi senão vai acusar ao dar o `mvn install`
+
 #### Client: Minha Aplicação a ser monitorada
 
 Na aplicação que será gerenciada, devemos colocar a seguinte dependência para ser gerenciada pelo SpringBootAdmin.
@@ -179,7 +187,9 @@ alem disso, coloca a seguinte configuração no client em `application.proprieti
 spring.boot.admin.client.url=http://localhost:8081/
 ```
 
-Agora eu devo rodar as duas; primeiro o SpringBootAdmin e Depois
+Agora eu devo rodar as duas; 
+
+Para acessar o SpringBootAdmin: acesse por : http://localhost:8081/. Por lá você vai ter acesso a sua aplicação spring e a todas as outras que estiverem rodando
 
 ### Vai mostrar coisas como ...
 
@@ -188,4 +198,4 @@ Agora eu devo rodar as duas; primeiro o SpringBootAdmin e Depois
 + Schefule
 + Mapeamento do sistema: incluindo `actuator` e `swaager`
 
- É uma interface gráfica bem rica que monitora todas as aplicações Spring Boot
+É uma interface gráfica bem rica que monitora todas as aplicações Spring Boot

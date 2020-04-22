@@ -68,3 +68,5 @@ Pode faze o deploy tanto por
 
 + Heroku CI
 + Git com Ferramenta de CI
+
+Deve-se habilitar `Automatic deploys`

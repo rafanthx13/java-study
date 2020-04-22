@@ -20,16 +20,16 @@ public class LibraryApiApplication {
 		SpringApplication.run(LibraryApiApplication.class, args);
 	}
 
-	@Autowired
-	private EmailService emailService;
+	// @Autowired
+	// private EmailService emailService;
 
-	@Bean // Quano se cria o Bena de CommandLineRunner, ele exeucuta esse método primeiro ao subir o spring
-	public CommandLineRunner runner(){
-		return args -> {
-			List<String> email = Arrays.asList("libraryapi-84272hash@inbox.mailtrap.io"); // Aqui, deve-se abrir a conta do mail trap e gerar o email e colocar aqui
-			emailService.sendMails("Testando serviço", email);
-			System.out.println("Emails Enviados");
-		}
-	}
+	// @Bean // Quano se cria o Bena de CommandLineRunner, ele exeucuta esse método primeiro ao subir o spring
+	// public CommandLineRunner runner(){
+	// 	return args -> {
+	// 		List<String> email = Arrays.asList("libraryapi-84272hash@inbox.mailtrap.io"); // Aqui, deve-se abrir a conta do mail trap e gerar o email e colocar aqui
+	// 		emailService.sendMails("Testando serviço", email);
+	// 		System.out.println("Emails Enviados");
+	// 	};
+	// }
 
 }
