@@ -2,7 +2,32 @@
 
 [TOC]
 
-## `Curso Udemy - JUnit 5`
+## all_docs
+
+Agrupamento de todas as documentaçôes, mas nâo exclui outras pasata terem a sua própria com conteudo diferente
+
+## Curso Udemy - Curso Udemy - Java SpringBoot Core
+
+**Título**: Spring Boot Expert: JPA, RESTFul API, Security, JWT e Mais
+
+**Descrição**: 
+Do Zero ao Expert em Spring Boot e todo o ecossistema Spring. Guia Completo e atualizado. CUPOM DESCONTO: "SPR-MAI-2020"
+
+**Link**: https://www.udemy.com/course/spring-boot-expert/
+
+**Instrutor**: Dougllas Sousa
+
+**Aprende**
++ Core do Spring e como ele funciona
++ @COnfiguration, @Bean
++ SPring IoC: Injeçâo de dependência no SPring
++ SPringa Data: JDBC, Hibernate, Srping Data JPA (o melhor)
++ BeanValidation e como funciona
++ SpringSecurity: Autenticaçâo com "BASIC" e "JWT" 
++ COnectar ao Banco de Dados H2 e MySQL
++ DOcumentaçâo com Swageer incluindo a autenticaçâo com JWT nas Requisições
+
+## Curso Udemy - Spring Rest JUnit 5
 
 **Pastas**
 + `01-project-intro-tests` : Exemplo básico de testes com Junit5 e AssertionsJ
